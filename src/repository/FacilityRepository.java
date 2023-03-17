@@ -1,11 +1,10 @@
-package src.service;
-
+package src.repository;
 
 import src.models.Facility;
 
 import java.util.Set;
 
-public interface FacilityService extends Service {
+public interface FacilityRepository {
     Set<Facility> displayFacility();
 
     void addNewHouse(Facility o);

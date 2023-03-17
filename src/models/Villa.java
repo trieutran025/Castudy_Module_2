@@ -1,16 +1,16 @@
 package src.models;
 
 public class Villa extends Facility{
-    private String roomStandards;
-    private String poolAre;
+    private int roomStandards;
+    private double poolAre;
     private int numberFloors;
 
     public Villa(String serviceName, double usableArea, long rentalCost, int maxPeople, String rentalType) {
         super(serviceName, usableArea, rentalCost, maxPeople, rentalType);
     }
 
-    public Villa(String serviceName, double usableArea, long rentalCost, int maxPeople, String rentalType, String roomStandards, String poolAre, int numberFloors) {
-        super(serviceName, usableArea, rentalCost, maxPeople, rentalType);
+    public Villa(double usableArea, long rentalCost, int maxPeople, String rentalType, int roomStandards, double poolAre, int numberFloors) {
+        super("Villa", usableArea, rentalCost, maxPeople, rentalType);
         this.roomStandards = roomStandards;
         this.poolAre = poolAre;
         this.numberFloors = numberFloors;
@@ -19,25 +19,25 @@ public class Villa extends Facility{
     public Villa() {
     }
 
-    public Villa(String roomStandards, String poolAre, int numberFloors) {
+    public Villa(int roomStandards, double poolAre, int numberFloors) {
         this.roomStandards = roomStandards;
         this.poolAre = poolAre;
         this.numberFloors = numberFloors;
     }
 
-    public String getRoomStandards() {
+    public int getRoomStandards() {
         return roomStandards;
     }
 
-    public void setRoomStandards(String roomStandards) {
+    public void setRoomStandards(int roomStandards) {
         this.roomStandards = roomStandards;
     }
 
-    public String getPoolAre() {
+    public double getPoolAre() {
         return poolAre;
     }
 
-    public void setPoolAre(String poolAre) {
+    public void setPoolAre(double poolAre) {
         this.poolAre = poolAre;
     }
 
