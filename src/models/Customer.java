@@ -1,12 +1,12 @@
 package src.models;
 
-public class Customer extends Person{
+public class Customer extends Person {
     private String customerCode;
 
     private String customerType;
     private String address;
 
-    public Customer( String customerCode,String name, String birth, String gender, String identityCard, String numberPhone, String email, String customerType,String address) {
+    public Customer(String customerCode, String name, String birth, String gender, String identityCard, String numberPhone, String email, String customerType, String address) {
         super(name, birth, gender, identityCard, numberPhone, email);
         this.customerCode = customerCode;
         this.customerType = customerType;
@@ -40,7 +40,13 @@ public class Customer extends Person{
     @Override
     public String toString() {
         return "Customer{" +
-                "customerCode='" + customerCode + '\'' +
+                "Code='" + customerCode + '\'' +
+                "Name='" + getName() + "\'" +
+                "Birth='" + getBirth() + "\'" +
+                "Gender='" + getGender() + "\'" +
+                "IdentityCard='" + getIdentityCard() + "\'" +
+                "numberPhone='" + getNumberPhone() + "\'" +
+                "email='" + getEmail() + "\'" +
                 ", customerType='" + customerType + '\'' +
                 ", address='" + address + '\'' +
                 '}';
