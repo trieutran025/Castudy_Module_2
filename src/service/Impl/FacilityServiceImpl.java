@@ -6,34 +6,27 @@ import src.repository.Impl.FacilityRepositoryImpl;
 
 
 import java.util.Set;
+import java.util.TreeMap;
 
 public class FacilityServiceImpl implements FacilityService {
     private FacilityRepository repository =(FacilityRepository) new FacilityRepositoryImpl();
 
+
     @Override
-    public Set<Facility> displayFacility() {
-        return repository.displayFacility();
+    public void displayFacility() {
+        repository.displayFacility();
     }
 
     @Override
-    public void addNewHouse(Facility o) {
-        repository.addNewHouse(o);
-    }
-
-    @Override
-    public void addNewVilla(Facility o) {
-        repository.addNewVilla(o);
-    }
-
-    @Override
-    public void addNewRoom(Facility o) {
-        repository.addNewRoom(o);
+    public void addFacility(Facility o) {
+        repository.addFacility(o);
     }
 
 
 
     @Override
-    public void displayFacilityMaintenance() {
-        repository.displayFacilityMaintenance();
+    public void displayListMaintenance() {
+        repository.displayListMaintenance();
     }
+
 }
