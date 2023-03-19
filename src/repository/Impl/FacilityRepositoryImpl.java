@@ -8,6 +8,7 @@ import src.models.Villa;
 import src.repository.FacilityRepository;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class FacilityRepositoryImpl implements FacilityRepository {
     private static int usageH = 0;
@@ -17,22 +18,15 @@ public class FacilityRepositoryImpl implements FacilityRepository {
 
     static {
         facilityMap = new LinkedHashMap<>();
-        facilityMap.put(new House(300.5, 300000000, 5, "year", 5, 3), usageH++);
-        facilityMap.put(new Villa(250, 1000000, 10, "day", 5, 300, 2), usageV++);
-        facilityMap.put(new Room(200, 500000, 2, "month", "water"), usageR++);
+        facilityMap.put(new House("SVVL-0001", 300.5, 300000000, 5, "year", 5, 3), usageH++);
+        facilityMap.put(new Villa("SVHO-0001",250, 1000000, 10, "day", 5, 300, 2), usageV++);
+        facilityMap.put(new Room("SVRO-0001",200, 500000, 2, "month", "water"), usageR++);
     }
 
 
     @Override
-    public void displayFacility() {
-            for(Facility key : facilityMap.keySet()){
-                if(facilityMap.get(key)>=5){
-                    System.out.println(key+":can duoc bao tri!");
-                }
-                else {
-                    System.out.println(key);
-                }
-            }
+    public Map<Facility, Integer> displayFacility() {
+        return facilityMap;
     }
 
     @Override
@@ -53,7 +47,7 @@ public class FacilityRepositoryImpl implements FacilityRepository {
     public void displayListMaintenance() {
         for(Facility key : facilityMap.keySet()){
             if(facilityMap.get(key)>=5){
-                System.out.println(key+":can duoc bao tri!");
+                System.out.println(key+":Needs maintenance!");
             }
         }
     }

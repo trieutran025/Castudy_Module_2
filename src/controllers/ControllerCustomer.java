@@ -9,10 +9,10 @@ import static src.controllers.FuramaController.customerService;
 import static src.controllers.Menu.scanner;
 
 public class ControllerCustomer {
-    private static String customerType = "";
+    private static String customerType;
 
     public static void ViewChoice() {
-        System.out.println("1.Diamond\n2.Platinium\n3.Gold\n4.Silver\n5.Member");
+        System.out.println("1.Diamond\n2.Platinum\n3.Gold\n4.Silver\n5.Member");
     }
 
     public static void findAll() {
@@ -29,7 +29,7 @@ public class ControllerCustomer {
                     customerType = "Diamond";
                     break;
                 case 2:
-                    customerType = "Platinium";
+                    customerType = "Platinum";
                     break;
                 case 3:
                     customerType = "Gold";
@@ -42,6 +42,7 @@ public class ControllerCustomer {
                     break;
                 default:
                     System.out.println("Enter Please again:");
+                    break;
             }
         } while (Objects.equals(customerType, ""));
         return customerType;

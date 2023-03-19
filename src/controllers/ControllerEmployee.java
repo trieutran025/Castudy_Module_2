@@ -3,83 +3,87 @@ package src.controllers;
 import src.models.Employee;
 
 import java.util.List;
+import java.util.Objects;
 
 import static src.controllers.FuramaController.employeeService;
 import static src.controllers.Menu.scanner;
 
 
 public class ControllerEmployee {
-    private static String level="";
-    private static String position="";
+    private static String level;
+    private static String position;
 
-    private static void viewChoiceLevel(){
-        System.out.println("1.Trung cấp\n2.Cao đẳng\n3.Đại học\n4.Sau đại học");
-    }
-    private static void viewChoicePosition(){
-        System.out.println("1.Lễ tân\n2.Phục vụ\n3.Chuyên viên\n4.Giám sát\n5.Quản lý\n6.Giám đốc");
-    }
+
     private static long checkSalary(String position){
-        if(position=="Lễ tân"){
+        if(Objects.equals(position, "Reception")){
             return 10000000;
-        } else if (position=="Phục vụ") {
+        } else if (Objects.equals(position, "Serve")) {
             return 5000000;
-        } else if (position=="Chuyên viên") {
+        } else if (Objects.equals(position, "Expert")) {
             return 12000000;
-        } else if (position=="Giám sát") {
+        } else if (Objects.equals(position, "Supervise")) {
             return 8000000;
-        }else if(position=="Quản lý"){
+        }else if(Objects.equals(position, "Administer")){
             return 20000000;
         }else {
             return 50000000;
         }
     }
-    private static String choicePosition(int choice){
-        do {
-            switch (choice) {
-                case 1:
-                    position = "Lễ tân";
-                    break;
-                case 2:
-                    position = "Phục vụ";
-                    break;
-                case 3:
-                    position = "Chuyên viên";
-                    break;
-                case 4:
-                    position = "Giám sát";
-                    break;
-                case 5:
-                    position = "Quản lý";
-                    break;
-                case 6:
-                    position = "Giám đốc";
-                    break;
-            }
-        }while (position.equals(""));
-        return position;
+    private static void viewChoiceLevel(){
+        System.out.println("1.Intermediate\n2.College\n3.University\n4.Postgraduate");
     }
     private static String choiceLevel(int choice) {
-        do {
-            switch (choice) {
-                case 1:
-                    level = "Trung cấp";
-                    break;
-                case 2:
-                    level = "Cao đẳng";
-                    break;
-                case 3:
-                    level = "Đại học";
-                    break;
-                case 4:
-                    level = "Sau đại học";
-                    break;
-                default:
-                    System.out.println("Please Choice Level!");
-                    break;
-            }
-        } while (level.equals(""));
+        switch (choice) {
+            case 1:
+                level = "Intermediate";
+                break;
+            case 2:
+                level = "College";
+                break;
+            case 3:
+                level = "University";
+                break;
+            case 4:
+                level = "Postgraduate";
+                break;
+            default:
+                System.out.println("Please Choice Level again!");
+                viewChoiceLevel();
+                return choiceLevel(scanner.nextInt());
+        }
         return level;
     }
+    private static void viewChoicePosition(){
+        System.out.println("1.Reception\n2.Serve\n3.Expert\n4.Supervise\n5.Administer\n6.Director");
+    }
+    private static String choicePosition(int choice){
+            switch (choice) {
+                case 1:
+                    position = "Reception";
+                    break;
+                case 2:
+                    position = "Serve";
+                    break;
+                case 3:
+                    position = "Expert";
+                    break;
+                case 4:
+                    position = "Supervise";
+                    break;
+                case 5:
+                    position = "Administer";
+                    break;
+                case 6:
+                    position = "Director";
+                    break;
+                default:
+                    System.out.println("Please choice Position again!");
+                    viewChoicePosition();
+                    return choicePosition(scanner.nextInt());
+            }
+        return position;
+    }
+
     public static void findAll(){
         List<Employee> employeeList = employeeService.findAll();
         for (Employee employee : employeeList) {
@@ -101,11 +105,11 @@ public class ControllerEmployee {
         String numberPhone = scanner.next();
         System.out.print("Enter email Employee:");
         String email = scanner.next();
-        System.out.print("Choice level Employee!");
+        System.out.println("Choice level Employee!");
         viewChoiceLevel();
          level = choiceLevel(scanner.nextInt());
 //        String level = scanner.next();4
-        System.out.print("Choice Position Employee!");
+        System.out.println("Choice Position Employee!");
         viewChoicePosition();
         position = choicePosition(scanner.nextInt());
 //      String position = scanner.next();

@@ -1,4 +1,12 @@
 package src.repository.Impl;
 
-public class BookingRepositoryImpl {
+import src.models.Booking;
+import src.repository.BookingRepository;
+
+public class BookingRepositoryImpl implements BookingRepository {
+
+    @Override
+    public void addBooking(Booking o) {
+
+    }
 }

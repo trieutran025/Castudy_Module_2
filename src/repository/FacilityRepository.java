@@ -2,8 +2,10 @@ package src.repository;
 
 import src.models.Facility;
 
+import java.util.Map;
+
 public interface FacilityRepository {
-    void displayFacility();
+    Map<Facility,Integer> displayFacility();
 
    void addFacility(Facility o);
 
