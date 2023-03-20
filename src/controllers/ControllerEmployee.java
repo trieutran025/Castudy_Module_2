@@ -5,7 +5,7 @@ import src.models.Employee;
 import java.util.List;
 import java.util.Objects;
 
-import static src.controllers.FuramaController.employeeService;
+import static src.controllers.FurumaController.employeeService;
 import static src.controllers.Menu.scanner;
 
 
@@ -95,6 +95,10 @@ public class ControllerEmployee {
         String employeeCode = scanner.next();
         System.out.print("Enter name Employee:");
         String name = scanner.next();
+        while (!name.matches(ControllerCustomer.REGEX_NAME)){
+            System.out.print("Enter again name:");
+            name = scanner.next();
+        }
         System.out.print("Enter birth day of Employee:");
         String birth = scanner.next();
         System.out.print("Enter gender of Employee:");

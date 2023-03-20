@@ -12,7 +12,7 @@ import java.util.Scanner;
 import static src.controllers.Menu.*;
 
 
-public class FuramaController {
+public class FurumaController {
     public static void main(String[] args) {
         displayMainMenu();
     }

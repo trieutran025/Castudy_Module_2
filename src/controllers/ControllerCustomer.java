@@ -5,11 +5,13 @@ import src.models.Customer;
 import java.util.List;
 import java.util.Objects;
 
-import static src.controllers.FuramaController.customerService;
+import static src.controllers.FurumaController.customerService;
 import static src.controllers.Menu.scanner;
 
 public class ControllerCustomer {
     private static String customerType;
+    public static final String REGEX_CUSTOMER_ID = "^KH-[0-9]{4}$";
+    public static final String REGEX_NAME ="^[A-Z][a-z]+(\\s[A-Z][a-z]+)*$";
 
     public static void ViewChoice() {
         System.out.println("1.Diamond\n2.Platinum\n3.Gold\n4.Silver\n5.Member");
@@ -51,8 +53,16 @@ public class ControllerCustomer {
     public static void addCustomer() {
         System.out.print("Enter CustomerCode:");
         String customerCode = scanner.next();
+        while (!customerCode.matches(REGEX_CUSTOMER_ID)) {
+            System.out.print("Enter again 'KH-XXXX' :");
+            customerCode = scanner.next();
+        }
         System.out.print("Enter CustomerName:");
         String customerName = scanner.next();
+        while (!customerName.matches(REGEX_NAME)){
+            System.out.println("Enter again Name:");
+            customerName =scanner.next();
+        }
         System.out.print("Enter birth Customer:");
         String customerBirth = scanner.next();
         System.out.print("Enter gender Customer:");

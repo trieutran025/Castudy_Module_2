@@ -4,11 +4,11 @@ import src.models.House;
 import src.models.Room;
 import src.models.Villa;
 
-import static src.controllers.FuramaController.facilityService;
+import static src.controllers.FurumaController.facilityService;
 import static src.controllers.Menu.scanner;
 
 public class ControllerFacility {
-    public static void add(){
+    public static void add() {
         do {
             System.out.println("-------------------------------------");
             System.out.println("1. Add New Villa");
@@ -36,7 +36,7 @@ public class ControllerFacility {
                     double poolAre = scanner.nextDouble();
                     System.out.print("Enter numberFloors:");
                     int numberFloors = scanner.nextInt();
-                    Villa villa = new Villa(serviceName,usableArea, rentalCost, maxPeople, rentalType, roomStandards, poolAre, numberFloors);
+                    Villa villa = new Villa(serviceName, usableArea, rentalCost, maxPeople, rentalType, roomStandards, poolAre, numberFloors);
                     facilityService.addFacility(villa);
                     break;
                 case 2:
@@ -59,7 +59,7 @@ public class ControllerFacility {
                     break;
                 case 3:
                     System.out.println("Enter serviceName:");
-                     serviceName = scanner.next();
+                    serviceName = scanner.next();
                     System.out.print("Enter usableAre:");
                     usableArea = scanner.nextDouble();
                     System.out.print("Enter rentalCost:");
@@ -70,7 +70,7 @@ public class ControllerFacility {
                     rentalType = scanner.next();
                     System.out.println("Enter serviceFree:");
                     String serviceFree = scanner.next();
-                    Room room = new Room(serviceName,usableArea, rentalCost, maxPeople, rentalType, serviceFree);
+                    Room room = new Room(serviceName, usableArea, rentalCost, maxPeople, rentalType, serviceFree);
                     facilityService.addFacility(room);
                     break;
                 case 4:
