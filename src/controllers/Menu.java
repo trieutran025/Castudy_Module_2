@@ -7,7 +7,7 @@ import static src.controllers.FurumaController.facilityService;
 
 
 public class Menu {
-    static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
 
 
     public static boolean displayMenuEmployees() {
@@ -22,7 +22,7 @@ public class Menu {
             int numberChoice = scanner.nextInt();
             switch (numberChoice) {
                 case 1:
-                   ControllerEmployee.findAll();
+                    ControllerEmployee.findAll();
                     break;
                 case 2:
                     ControllerEmployee.add();
@@ -73,20 +73,20 @@ public class Menu {
             System.out.println("-------------------------------------");
             System.out.println("1. Display list facility");
             System.out.println("2. Add new facility");
-            System.out.println("3. Edit facility");
+            System.out.println("3. Display list facility maintenance");
             System.out.println("4. Return main menu ");
             System.out.println("--------------------------------------");
             System.out.print("Enter 1 ->4:");
             int numberChoice = scanner.nextInt();
             switch (numberChoice) {
                 case 1:
-                    facilityService.displayFacility();
+                    ControllerFacility.display();
                     break;
                 case 2:
                     ControllerFacility.add();
                     break;
                 case 3:
-                   facilityService.displayListMaintenance();
+                        facilityService.displayListMaintenance();
                     break;
                 case 4:
                     break;

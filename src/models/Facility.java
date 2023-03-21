@@ -1,18 +1,28 @@
 package src.models;
 
 public abstract class Facility {
+    private String serviceID;
     private String serviceName;
     private double usableArea;
     private long rentalCost;
     private int maxPeople;
     private String rentalType;
 
-    public Facility(String serviceName, double usableArea, long rentalCost, int maxPeople, String rentalType) {
+    public Facility(String serviceID, String serviceName, double usableArea, long rentalCost, int maxPeople, String rentalType) {
+        this.serviceID = serviceID;
         this.serviceName = serviceName;
         this.usableArea = usableArea;
         this.rentalCost = rentalCost;
         this.maxPeople = maxPeople;
         this.rentalType = rentalType;
+    }
+
+    public String getServiceID() {
+        return serviceID;
+    }
+
+    public void setServiceID(String serviceID) {
+        this.serviceID = serviceID;
     }
 
     public Facility() {
@@ -65,7 +75,6 @@ public abstract class Facility {
                 ", usableArea=" + usableArea +
                 ", rentalCost=" + rentalCost +
                 ", maxPeople=" + maxPeople +
-                ", rentalType='" + rentalType + '\'' +
-                '}';
+                ", rentalType='" + rentalType + '\'' ;
     }
 }

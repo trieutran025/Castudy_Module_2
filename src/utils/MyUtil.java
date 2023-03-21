@@ -1,2 +1,4 @@
-package src.utils;public class MyUtil {
+package src.utils;
+
+public class MyUtil {
 }

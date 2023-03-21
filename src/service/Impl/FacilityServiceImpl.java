@@ -5,14 +5,13 @@ import src.repository.FacilityRepository;
 import src.repository.Impl.FacilityRepositoryImpl;
 
 
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.Map;
 
 public class FacilityServiceImpl implements FacilityService {
     private FacilityRepository repository =(FacilityRepository) new FacilityRepositoryImpl();
     @Override
-    public void displayFacility() {
-        repository.displayFacility();
+    public Map<Facility, Integer> displayFacility() {
+        return repository.displayFacility();
     }
 
     @Override

@@ -19,15 +19,17 @@ public class FacilityRepositoryImpl implements FacilityRepository {
 
     static {
         facilityMap = new LinkedHashMap<>();
-        facilityMap.put(new House("SVVL-0001", 300.5, 300000000, 5, "year", 5, 3), usageH++);
-        facilityMap.put(new Villa("SVHO-0001", 250, 1000000, 10, "day", 5, 300, 2), usageV++);
-        facilityMap.put(new Room("SVRO-0001", 200, 500000, 2, "month", "water"), usageR++);
+        facilityMap.put(new Villa("SVHO-0001", "Villa",250, 1000000, "day", 5, 300, 2), 1);
+        facilityMap.put(new House("SVVL-0001","House", 300.5, 300000000, 5, "year", 5, 3), 1);
+        facilityMap.put(new Room("SVRO-0001","Room",200, 500000, 2, "month", "water"), 1);
     }
 
     @Override
     public Map<Facility, Integer> displayFacility() {
         return facilityMap;
     }
+
+
 
     @Override
     public void addFacility(Facility o) {
