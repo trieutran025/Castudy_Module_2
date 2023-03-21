@@ -71,6 +71,7 @@ public abstract class Facility {
     @Override
     public String toString() {
         return "Facility{" +
+                "serviceID='"+serviceID+ '\''+
                 "serviceName='" + serviceName + '\'' +
                 ", usableArea=" + usableArea +
                 ", rentalCost=" + rentalCost +

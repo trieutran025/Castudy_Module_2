@@ -14,10 +14,11 @@ import static src.controllers.Menu.scanner;
 public class ControllerFacility {
 
     public static void addNewVilla() {
+        scanner.nextLine();
         String serviceID;
         do {
             System.out.print("Enter serviceID(SVVL-YYY):");
-            serviceID = scanner.next();
+            serviceID = scanner.nextLine();
             if (!serviceID.matches(MyRegex.REGEX_SERVICE_VILLA)) {
                 System.out.println("ServiceID must be (SVVL-YYYY)!");
             }
@@ -49,8 +50,18 @@ public class ControllerFacility {
             }
         } while (rentalCost < 0);
 
-        System.out.print("Enter maxPeople:");
-        int maxPeople = scanner.nextInt();
+//        System.out.print("Enter maxPeople:");
+//        int maxPeople = scanner.nextInt();
+        int maxPeople;
+        boolean check;
+        do{
+            System.out.print("Enter max people:");
+            maxPeople = Integer.parseInt(scanner.next());
+             check = (maxPeople>0||maxPeople<20);
+            if(!check){
+                System.out.println("People must be >0 or <20!");
+            }
+        }while (!check);
 
         System.out.print("Enter rentalType:");
         String rentalType = scanner.next();
@@ -65,12 +76,13 @@ public class ControllerFacility {
         int numberFloors = scanner.nextInt();
 
 // create a new Villa object with the entered values
-        Villa villa = new Villa(serviceID, serviceName, rentalCost, maxPeople, rentalType, roomStandards, poolArea, numberFloors);
+        Villa villa = new Villa(serviceID, serviceName, rentalCost, maxPeople, maxPeople, rentalType, roomStandards, poolArea, numberFloors);
         facilityService.addFacility(villa);
 
     }
 
     public static void addNewHouse() {
+        scanner.nextLine();
         String serviceID;
         do {
             System.out.print("Enter serviceID(SVHO-YYY):");
@@ -102,8 +114,16 @@ public class ControllerFacility {
                 System.err.println("Input is Number!");
             }
         } while (rentalCost < 0);
-        System.out.print("Enter max People:");
-        int maxPeople = scanner.nextInt();
+        int maxPeople;
+        boolean check;
+        do{
+            System.out.print("Enter max people:");
+            maxPeople = Integer.parseInt(scanner.next());
+            check = (maxPeople>0||maxPeople<20);
+            if(!check){
+                System.out.println("People must be >0 or <20!");
+            }
+        }while (!check);
         System.out.print("Enter  rentalType:");
         String rentalType = scanner.next();
         System.out.print("Enter  roomStandards:");
@@ -115,6 +135,7 @@ public class ControllerFacility {
     }
 
     public static void addNewRoom() {
+        scanner.nextLine();
         String serviceID;
         do {
             System.out.print("Enter serviceID(SVXX-YYY):");
@@ -146,13 +167,21 @@ public class ControllerFacility {
                 System.err.println("Input is Number!");
             }
         } while (rentalCost < 0);
-        System.out.print("Enter maxPeople:");
-        int maxPeople = scanner.nextInt();
+        int maxPeople;
+        boolean check;
+        do{
+            System.out.print("Enter max people:");
+            maxPeople = Integer.parseInt(scanner.next());
+            check = (maxPeople>0||maxPeople<20);
+            if(!check){
+                System.out.println("People must be >0 or <20!");
+            }
+        }while (!check);
         System.out.println("Enter rentalType:");
         String rentalType = scanner.next();
         System.out.println("Enter serviceFree:");
         String serviceFree = scanner.next();
-        Room room = new Room(serviceID, "1", 1, rentalCost, maxPeople, rentalType, serviceFree);
+        Room room = new Room(serviceID, serviceName, usableArea, rentalCost, maxPeople, rentalType, serviceFree);
         facilityService.addFacility(room);
     }
 
