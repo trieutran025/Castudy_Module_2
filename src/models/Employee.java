@@ -17,6 +17,8 @@ public class Employee extends Person {
     public Employee() {
     }
 
+
+
     public String getEmployeeCode() {
         return employeeCode;
     }
@@ -51,17 +53,12 @@ public class Employee extends Person {
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "Code='" + employeeCode + '\'' +
-                "name='" + getName() + "\'" +
-                "birth='" + getBirth() + "\'" +
-                "gender='" + getGender() + "\'" +
-                "identityCard='" + getIdentityCard() + "\'" +
-                "numberPhone='" + getNumberPhone() + "\'" +
-                "email='" + getEmail() + "\'" +
+        return super.toString()+
+                "Employee:"+
                 ", level='" + level + '\'' +
                 ", position='" + position + '\'' +
                 ", salary=" + salary +
                 '}';
     }
+
 }

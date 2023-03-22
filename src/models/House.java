@@ -1,11 +1,11 @@
 package src.models;
 
 public class House extends Facility {
-    private int roomStandards;
+    private String roomStandards;
     private int numberFloors;
 
 
-    public House(String serviceID,String serviceName, double usableArea, long rentalCost, int maxPeople, String rentalType, int roomStandards, int numberFloors) {
+    public House(String serviceID,String serviceName, double usableArea, long rentalCost, int maxPeople, String rentalType, String roomStandards, int numberFloors) {
         super(serviceID,serviceName, usableArea, rentalCost, maxPeople, rentalType);
         this.roomStandards = roomStandards;
         this.numberFloors = numberFloors;
@@ -15,16 +15,16 @@ public class House extends Facility {
     }
 
 
-    public House(int roomStandards, int numberFloors) {
+    public House(String roomStandards, int numberFloors) {
         this.roomStandards = roomStandards;
         this.numberFloors = numberFloors;
     }
 
-    public int getRoomStandards() {
+    public String getRoomStandards() {
         return roomStandards;
     }
 
-    public void setRoomStandards(int roomStandards) {
+    public void setRoomStandards(String roomStandards) {
         this.roomStandards = roomStandards;
     }
 

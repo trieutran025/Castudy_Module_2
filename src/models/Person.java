@@ -8,10 +8,6 @@ public abstract class Person {
     private String numberPhone;
     private String email;
 
-
-
-
-
     public Person(String name, String birth, String gender, String identityCard, String numberPhone, String email) {
         this.name = name;
         this.birth = birth;
@@ -30,6 +26,14 @@ public abstract class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getBirth() {
+        return birth;
+    }
+
+    public void setBirth(String birth) {
+        this.birth = birth;
     }
 
     public String getGender() {
@@ -62,14 +66,6 @@ public abstract class Person {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getBirth() {
-        return birth;
-    }
-
-    public void setBirth(String birth) {
-        this.birth = birth;
     }
 
     @Override

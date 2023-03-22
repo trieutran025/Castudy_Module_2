@@ -13,6 +13,9 @@ public class Customer extends Person {
         this.address = address;
     }
 
+    public Customer() {
+    }
+
     public String getCustomerCode() {
         return customerCode;
     }
@@ -39,13 +42,8 @@ public class Customer extends Person {
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "Code='" + customerCode + '\'' +
-                "Name='" + getName() + "\'" +
-                "Birth='" + getBirth() + "\'" +
-                "Gender='" + getGender() + "\'" +
-                "IdentityCard='" + getIdentityCard() + "\'" +
-                "numberPhone='" + getNumberPhone() + "\'" +
+        return super.toString()+
+                "Customer:"+
                 "email='" + getEmail() + "\'" +
                 ", customerType='" + customerType + '\'' +
                 ", address='" + address + '\'' +

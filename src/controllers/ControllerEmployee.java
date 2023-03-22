@@ -1,7 +1,12 @@
 package src.controllers;
 
+import src.libs.MyRegex;
 import src.models.Employee;
+import src.utils.MyUtil;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,7 +18,7 @@ public class ControllerEmployee {
     private static String level;
     private static String position;
 
-
+    public static final String REGEX_ELEMENT_ID="^E-[0-9]{4}$";
     private static long checkSalary(String position){
         if(Objects.equals(position, "Reception")){
             return 10000000;
@@ -91,52 +96,129 @@ public class ControllerEmployee {
         }
     }
     public static void add(){
-        System.out.print("Enter EmployeeCode:");
-        String employeeCode = scanner.next();
-        System.out.print("Enter name Employee:");
-        String name = scanner.next();
-        while (!name.matches(ControllerCustomer.REGEX_NAME)){
-            System.out.print("Enter again name:");
-            name = scanner.next();
-        }
-        System.out.print("Enter birth day of Employee:");
-        String birth = scanner.next();
-        System.out.print("Enter gender of Employee:");
-        String gender = scanner.next();
-        System.out.print("Enter identityCard Employee:");
-        String identityCard = scanner.next();
-        System.out.print("Enter numberPhone Employee:");
-        String numberPhone = scanner.next();
-        System.out.print("Enter email Employee:");
-        String email = scanner.next();
+        scanner.nextLine();
+        String employeeID;
+        do{
+            System.out.print("Enter employeeID:");
+            employeeID =scanner.next();
+            if(!employeeID.matches(REGEX_ELEMENT_ID)){
+                System.out.println("Please element id format E-YYYY(Y is number)!");
+            }
+        }while (!employeeID.matches(REGEX_ELEMENT_ID));
+        String name;
+        do{
+            System.out.print("Enter employee name :");
+            name =scanner.next();
+            if(!name.matches(MyRegex.REGEX_NAME)){
+                System.out.println("Enter name again!");
+            }
+        }while (!name.matches(MyRegex.REGEX_NAME));
+        String birth;
+        boolean check;
+        do{
+            System.out.print("Enter birthday(dd/MM/yyyy):");
+            birth = scanner.next();
+            LocalDate birthday = LocalDate.parse(birth,DateTimeFormatter.ofPattern(MyRegex.REGEX_DATE));
+            LocalDate today = LocalDate.now();
+            int age = Period.between(birthday, today).getYears();
+             check  = MyUtil.checkDate(age);
+            if(!check){
+                System.out.println("Enter birthday is age :>= 18 or <=100");
+            }
+        }while (!check);
+        MyUtil.ViewGender();
+        String gender = MyUtil.setGender(scanner.nextInt());
+        String identityCard;
+        do{
+            System.out.print("Enter identityCard:");
+            identityCard =scanner.nextLine();
+            if(!identityCard.matches(MyRegex.REGEX_ID_NUMBER)){
+                System.out.println("identityCard must be 9 number or 12 number!");
+            }
+        }while (!identityCard.matches(MyRegex.REGEX_ID_NUMBER));
+        String numberPhone;
+        do{
+            System.out.print("Enter number phone:");
+            numberPhone = scanner.nextLine();
+            if(!numberPhone.matches(MyRegex.REGEX_NUMBER_PHONE)){
+                System.out.println("Enter must be format!");
+            }
+        }while (!numberPhone.matches(MyRegex.REGEX_NUMBER_PHONE));
+        String email;
+        do{
+            System.out.println("Enter email:");
+            email = scanner.nextLine();
+            if(!email.matches(MyRegex.REGEX_EMAIL)){
+                System.out.println("Enter email must be format!");
+            }
+        }while (!email.matches(MyRegex.REGEX_EMAIL));
         System.out.println("Choice level Employee!");
         viewChoiceLevel();
          level = choiceLevel(scanner.nextInt());
-//        String level = scanner.next();4
         System.out.println("Choice Position Employee!");
         viewChoicePosition();
         position = choicePosition(scanner.nextInt());
-//      String position = scanner.next();
-        System.out.print("Enter salary Employee:");
         long salary = checkSalary(position);
-        Employee employee = new Employee(employeeCode, name, birth, gender, identityCard, numberPhone, email, level, position, salary);
+        Employee employee = new Employee(employeeID, name, birth, gender, identityCard, numberPhone, email, level, position, salary);
         employeeService.add(employee);
     }
     public static void set(){
-        System.out.print("Enter EmployeeCode:");
-        String employeeCode = scanner.next();
-        System.out.print("Enter new name Employee:");
-        String name = scanner.next();
-        System.out.print("Enter new birth day of Employee:");
-        String birth = scanner.next();
-        System.out.print("Enter new gender of Employee:");
-        String gender = scanner.next();
-        System.out.print("Enter new identityCard Employee:");
-        String identityCard = scanner.next();
-        System.out.print("Enter new numberPhone Employee:");
-        String numberPhone = scanner.next();
-        System.out.print("Enter new email Employee:");
-        String email = scanner.next();
+        scanner.nextLine();
+        String employeeID;
+        do{
+            System.out.print("Enter employeeID:");
+            employeeID =scanner.next();
+            if(!employeeID.matches(REGEX_ELEMENT_ID)){
+                System.out.println("Please element id format E-YYYY(Y is number)!");
+            }
+        }while (!employeeID.matches(REGEX_ELEMENT_ID));
+        String name;
+        do{
+            System.out.println("Enter new employee name :");
+            name =scanner.next();
+            if(!name.matches(MyRegex.REGEX_NAME)){
+                System.out.println("Enter name again!");
+            }
+        }while (!name.matches(MyRegex.REGEX_NAME));
+        String birth;
+        boolean check;
+        do{
+            System.out.print("Enter birthday(dd/MM/yyyy):");
+            birth = scanner.next();
+            LocalDate birthday = LocalDate.parse(birth, DateTimeFormatter.ofPattern(MyRegex.REGEX_DATE));
+            LocalDate today = LocalDate.now();
+            int age = Period.between(birthday, today).getYears();
+            check  = MyUtil.checkDate(age);
+            if(!check){
+                System.out.println("Enter birthday is age :>= 18 or <=100");
+            }
+        }while (!check);
+        MyUtil.ViewGender();
+        String gender = MyUtil.setGender(scanner.nextInt());
+        String identityCard;
+        do{
+            System.out.print("Enter identityCard:");
+            identityCard =scanner.nextLine();
+            if(!identityCard.matches(MyRegex.REGEX_ID_NUMBER)){
+                System.out.println("identityCard must be 9 number or 12 number!");
+            }
+        }while (!identityCard.matches(MyRegex.REGEX_ID_NUMBER));
+        String numberPhone;
+        do{
+            System.out.print("Enter number phone:");
+            numberPhone = scanner.nextLine();
+            if(!numberPhone.matches(MyRegex.REGEX_NUMBER_PHONE)){
+                System.out.println("Enter must be format!");
+            }
+        }while (!numberPhone.matches(MyRegex.REGEX_NUMBER_PHONE));
+        String email;
+        do{
+            System.out.println("Enter email:");
+            email = scanner.nextLine();
+            if(!email.matches(MyRegex.REGEX_EMAIL)){
+                System.out.println("Enter email must be format!");
+            }
+        }while (!email.matches(MyRegex.REGEX_EMAIL));
         System.out.print("Enter new level Employee:");
         viewChoiceLevel();
         level = choiceLevel(scanner.nextInt());
@@ -145,6 +227,6 @@ public class ControllerEmployee {
         position = choicePosition(scanner.nextInt());
         System.out.print("Enter new salary Employee:");
         long salary = checkSalary(position);
-        employeeService.set(employeeCode, name, birth, gender, identityCard, numberPhone, email, level, position, salary);
+        employeeService.set(employeeID, name, birth, gender, identityCard, numberPhone, email, level, position, salary);
     }
 }

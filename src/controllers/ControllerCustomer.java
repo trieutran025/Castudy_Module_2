@@ -1,7 +1,12 @@
 package src.controllers;
 
+import src.libs.MyRegex;
 import src.models.Customer;
+import src.utils.MyUtil;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,10 +15,11 @@ import static src.controllers.Menu.scanner;
 
 public class ControllerCustomer {
     private static String customerType;
-    public static final String REGEX_CUSTOMER_ID = "^KH-[0-9]{4}$";
+    public static final String REGEX_CUSTOMER_ID = "^C-[0-9]{4}$";
     public static final String REGEX_NAME = "^[A-Z][a-z]+(\\s[A-Z][a-z]+)*$";
 
     public static void ViewChoice() {
+        System.out.println("Choice Type:");
         System.out.println("1.Diamond\n2.Platinum\n3.Gold\n4.Silver\n5.Member");
     }
 
@@ -51,11 +57,12 @@ public class ControllerCustomer {
     }
 
     public static void addCustomer() {
-        String customerCode;
+        scanner.nextLine();
+        String customerID;
         do {
             System.out.print("Enter CustomerCode(KH-XXXX):");
-            customerCode = scanner.next();
-        } while (!customerCode.matches(REGEX_CUSTOMER_ID));
+            customerID = scanner.next();
+        } while (!customerID.matches(REGEX_CUSTOMER_ID));
 
         String customerName;
         do {
@@ -63,10 +70,21 @@ public class ControllerCustomer {
             customerName = scanner.next();
         } while (!customerName.matches(REGEX_NAME));
 
-        System.out.print("Enter birth Customer:");
-        String customerBirth = scanner.next();
-        System.out.print("Enter gender Customer:");
-        String customerGender = scanner.next();
+        String birth;
+        boolean check;
+        do{
+            System.out.print("Enter birthday(dd/MM/yyyy):");
+            birth = scanner.next();
+            LocalDate birthday = LocalDate.parse(birth,DateTimeFormatter.ofPattern(MyRegex.REGEX_DATE));
+            LocalDate today = LocalDate.now();
+            int age = Period.between(birthday, today).getYears();
+            check  = MyUtil.checkDate(age);
+            if(!check){
+                System.out.println("Enter birthday is age :>= 18 or <=100");
+            }
+        }while (!check);
+        MyUtil.ViewGender();
+        String gender = MyUtil.setGender(scanner.nextInt());
         System.out.print("Enter identityCard Customer");
         String identityCard = scanner.next();
         System.out.print("Enter numberPhone Customer:");
@@ -78,20 +96,38 @@ public class ControllerCustomer {
         String Type = choiceCustomerType(scanner.nextInt());
         System.out.print("Enter Address Customer:");
         String address = scanner.next();
-        Customer customer = new Customer(customerCode, customerName, customerBirth, customerGender, identityCard, numberPhone, email, Type, address);
+         Customer customer = new Customer(customerID, customerName, birth, gender, identityCard, numberPhone, email, Type, address);
         customerService.add(customer);
     }
 
     public static void setCustomer() {
-        System.out.print("Enter CustomerCode:");
-        String customerCode = scanner.next();
-        System.out.print("Enter new  CustomerName:");
-        String customerName = scanner.next();
-        System.out.print("Enter new birth Customer:");
-        String customerBirth = scanner.next();
-        System.out.print("Enter new  gender Customer:");
-        String customerGender = scanner.next();
-        System.out.print("Enter new identityCard Customer");
+        scanner.nextLine();
+        String customerID;
+        do {
+            System.out.print("Enter CustomerCode(KH-XXXX):");
+            customerID = scanner.next();
+        } while (!customerID.matches(REGEX_CUSTOMER_ID));
+
+        String customerName;
+        do {
+            System.out.println("Enter customer :");
+            customerName = scanner.next();
+        } while (!customerName.matches(REGEX_NAME));
+        String birth;
+        boolean check;
+        do{
+            System.out.print("Enter birthday(dd/MM/yyyy):");
+            birth = scanner.next();
+            LocalDate birthday = LocalDate.parse(birth, DateTimeFormatter.ofPattern(MyRegex.REGEX_DATE));
+            LocalDate today = LocalDate.now();
+            int age = Period.between(birthday, today).getYears();
+            check  = MyUtil.checkDate(age);
+            if(!check){
+                System.out.println("Enter birthday is age :>= 18 or <=100");
+            }
+        }while (!check);
+        MyUtil.ViewGender();
+        String gender = MyUtil.setGender(scanner.nextInt());
         String identityCard = scanner.next();
         System.out.print("Enter new numberPhone Customer:");
         String numberPhone = scanner.next();
@@ -102,6 +138,6 @@ public class ControllerCustomer {
         String Type = choiceCustomerType(scanner.nextInt());
         System.out.print("Enter new Address Customer:");
         String address = scanner.next();
-        customerService.set(customerCode, customerName, customerBirth, customerGender, identityCard, numberPhone, email, Type, address);
+        customerService.set(customerID, customerName, birth, gender, identityCard, numberPhone, email, Type, address);
     }
 }

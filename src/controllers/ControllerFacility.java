@@ -5,6 +5,7 @@ import src.models.Facility;
 import src.models.House;
 import src.models.Room;
 import src.models.Villa;
+import src.utils.MyUtil;
 
 import java.util.Map;
 
@@ -15,6 +16,7 @@ public class ControllerFacility {
 
     public static void addNewVilla() {
         scanner.nextLine();
+        String regexName = "^Villa$";
         String serviceID;
         do {
             System.out.print("Enter serviceID(SVVL-YYY):");
@@ -28,7 +30,10 @@ public class ControllerFacility {
         do {
             System.out.print("Enter serviceName:");
             serviceName = scanner.nextLine();
-        } while (!serviceName.matches(MyRegex.REGEX_NAME));
+            if(!serviceName.matches(regexName)){
+                System.out.println("Enter serviceName again must be Villa!");
+            }
+        } while (!serviceName.matches(regexName));
 
         double usableArea = 0;
         do {
@@ -50,32 +55,44 @@ public class ControllerFacility {
             }
         } while (rentalCost < 0);
 
-//        System.out.print("Enter maxPeople:");
-//        int maxPeople = scanner.nextInt();
         int maxPeople;
         boolean check;
         do{
             System.out.print("Enter max people:");
             maxPeople = Integer.parseInt(scanner.next());
-             check = (maxPeople>0||maxPeople<20);
+             check = (maxPeople>0&&maxPeople<20);
             if(!check){
-                System.out.println("People must be >0 or <20!");
+                System.out.println("People must be >0 and <20!");
             }
         }while (!check);
-
-        System.out.print("Enter rentalType:");
-        String rentalType = scanner.next();
-
-        System.out.print("Enter roomStandards:");
-        int roomStandards = scanner.nextInt();
-
-        System.out.print("Enter poolArea:");
-        double poolArea = scanner.nextDouble();
-
-        System.out.print("Enter numberFloors:");
-        int numberFloors = scanner.nextInt();
-
-// create a new Villa object with the entered values
+        ControllerCustomer.ViewChoice();
+        String rentalType = ControllerCustomer.choiceCustomerType(scanner.nextInt());
+        MyUtil.ViewChoiceStandards();
+        String roomStandards = MyUtil.setRomStandards(scanner.nextInt());
+        double poolArea = 0;
+        do {
+            try {
+                System.out.print("Enter poll area >30m2:");
+                poolArea = Double.parseDouble(scanner.next());
+                if(poolArea<=30){
+                    System.out.println("Please Enter poll area >30m2");
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("Input is Number!");
+            }
+        } while (poolArea <= 30);
+        int numberFloors = 0;
+        do{
+            try {
+                System.out.print("Enter number floors:");
+                numberFloors = Integer.parseInt(scanner.next());
+                if (numberFloors < 0) {
+                    System.out.println("number float > 0");
+                }
+            }catch (NumberFormatException e){
+                System.err.println("Input is int!");
+            }
+        }while (numberFloors<0);
         Villa villa = new Villa(serviceID, serviceName, rentalCost, maxPeople, maxPeople, rentalType, roomStandards, poolArea, numberFloors);
         facilityService.addFacility(villa);
 
@@ -83,19 +100,23 @@ public class ControllerFacility {
 
     public static void addNewHouse() {
         scanner.nextLine();
+        String regexName = "^House$";
         String serviceID;
         do {
             System.out.print("Enter serviceID(SVHO-YYY):");
             serviceID = scanner.next();
-            if (!serviceID.matches(MyRegex.REGEX_SERVICE_ROOM)) {
+            if (!serviceID.matches(MyRegex.REGEX_SERVICE_HOUSE)) {
                 System.out.print("ServiceID must be (SVHO-YYYY)!");
             }
-        } while (!serviceID.matches(MyRegex.REGEX_SERVICE_ROOM));
+        } while (!serviceID.matches(MyRegex.REGEX_SERVICE_HOUSE));
         String serviceName;
         do {
             System.out.print("Enter serviceName:");
             serviceName = scanner.nextLine();
-        } while (!serviceName.matches(MyRegex.REGEX_NAME));
+            if(!serviceName.matches(regexName)){
+                System.out.println("Enter serviceName again must be House!");
+            }
+        } while (!serviceName.matches(regexName));
         double usableArea = 0;
         do {
             try {
@@ -124,18 +145,29 @@ public class ControllerFacility {
                 System.out.println("People must be >0 or <20!");
             }
         }while (!check);
-        System.out.print("Enter  rentalType:");
-        String rentalType = scanner.next();
-        System.out.print("Enter  roomStandards:");
-        int roomStandards = scanner.nextInt();
-        System.out.print("Enter numberFloors:");
-        int numberFloors = scanner.nextInt();
+        ControllerCustomer.ViewChoice();
+        String rentalType = ControllerCustomer.choiceCustomerType(scanner.nextInt());
+        MyUtil.ViewChoiceStandards();
+        String roomStandards = MyUtil.setRomStandards(scanner.nextInt());
+        int numberFloors = 0;
+        do{
+            try {
+                System.out.print("Enter number floors:");
+                numberFloors = Integer.parseInt(scanner.next());
+                if (numberFloors < 0) {
+                    System.out.print("number float > 0");
+                }
+            }catch (NumberFormatException e){
+                System.err.println("Input is Number!");
+            }
+        }while (numberFloors<0);
         House house = new House(serviceID, serviceName, 1, rentalCost, maxPeople, rentalType, roomStandards, numberFloors);
         facilityService.addFacility(house);
     }
 
     public static void addNewRoom() {
         scanner.nextLine();
+        String regexName = "^Room$";
         String serviceID;
         do {
             System.out.print("Enter serviceID(SVXX-YYY):");
@@ -148,7 +180,10 @@ public class ControllerFacility {
         do {
             System.out.print("Enter serviceName:");
             serviceName = scanner.nextLine();
-        } while (!serviceName.matches(MyRegex.REGEX_NAME));
+            if(!serviceName.matches(regexName)){
+                System.out.println("Enter serviceName again must be House!");
+            }
+        } while (!serviceName.matches(regexName));
         double usableArea = 0;
         do {
             try {
@@ -172,15 +207,15 @@ public class ControllerFacility {
         do{
             System.out.print("Enter max people:");
             maxPeople = Integer.parseInt(scanner.next());
-            check = (maxPeople>0||maxPeople<20);
+            check = (maxPeople>0&&maxPeople<20);
             if(!check){
                 System.out.println("People must be >0 or <20!");
             }
         }while (!check);
-        System.out.println("Enter rentalType:");
-        String rentalType = scanner.next();
-        System.out.println("Enter serviceFree:");
-        String serviceFree = scanner.next();
+        MyUtil.viewRentalType();
+        String rentalType =MyUtil.setRentalType(scanner.nextInt());
+        MyUtil.ViewChoiceServiceFree();
+        String serviceFree = String.valueOf(Integer.parseInt(MyUtil.setServiceFree(scanner.nextInt())));
         Room room = new Room(serviceID, serviceName, usableArea, rentalCost, maxPeople, rentalType, serviceFree);
         facilityService.addFacility(room);
     }
@@ -201,7 +236,7 @@ public class ControllerFacility {
             System.out.println("3. Add New Room");
             System.out.println("4. Back to menu");
             System.out.println("-------------------------------------");
-            System.out.println("Enter choice:");
+            System.out.print("Enter choice:");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
