@@ -1,31 +1,24 @@
 package src.models;
 
 public class Employee extends Person {
-    private String employeeCode;
+
     private String level;
     private String position;
     private long salary;
 
-    public Employee(String employeeCode, String name, String birth, String gender, String identityCard, String numberPhone, String email, String level, String position, long salary) {
-        super(name, birth, gender, identityCard, numberPhone, email);
-        this.employeeCode = employeeCode;
+    public Employee(String level, String position, long salary) {
         this.level = level;
         this.position = position;
         this.salary = salary;
     }
 
-    public Employee() {
+    public Employee(String id, String name, String birth, String gender, String identityCard, String numberPhone, String email, String level, String position, long salary) {
+        super(id, name, birth, gender, identityCard, numberPhone, email);
+        this.level = level;
+        this.position = position;
+        this.salary = salary;
     }
 
-
-
-    public String getEmployeeCode() {
-        return employeeCode;
-    }
-
-    public void setEmployeeCode(String employeeCode) {
-        this.employeeCode = employeeCode;
-    }
 
     public String getLevel() {
         return level;
@@ -53,12 +46,11 @@ public class Employee extends Person {
 
     @Override
     public String toString() {
-        return super.toString()+
-                "Employee:"+
-                ", level='" + level + '\'' +
+        return "Employee{" +
+                super.toString() +
+                "level='" + level + '\'' +
                 ", position='" + position + '\'' +
                 ", salary=" + salary +
                 '}';
     }
-
 }

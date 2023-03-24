@@ -1,6 +1,8 @@
 package src.models;
 
-public abstract class Facility {
+import java.util.Objects;
+
+public abstract class Facility implements Comparable<Facility> {
     private String serviceID;
     private String serviceName;
     private double usableArea;
@@ -69,13 +71,26 @@ public abstract class Facility {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Facility)) return false;
+        Facility facility = (Facility) o;
+        return Double.compare(facility.getUsableArea(), getUsableArea()) == 0 && getRentalCost() == facility.getRentalCost() && getMaxPeople() == facility.getMaxPeople() && getServiceID().equals(facility.getServiceID()) && getServiceName().equals(facility.getServiceName()) && Objects.equals(getRentalType(), facility.getRentalType());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getServiceID(), getServiceName(), getUsableArea(), getRentalCost(), getMaxPeople(), getRentalType());
+    }
+
+    @Override
     public String toString() {
         return "Facility{" +
-                "serviceID='"+serviceID+ '\''+
+                "serviceID='" + serviceID + '\'' +
                 "serviceName='" + serviceName + '\'' +
                 ", usableArea=" + usableArea +
                 ", rentalCost=" + rentalCost +
                 ", maxPeople=" + maxPeople +
-                ", rentalType='" + rentalType + '\'' ;
+                ", rentalType='" + rentalType + '\'';
     }
 }

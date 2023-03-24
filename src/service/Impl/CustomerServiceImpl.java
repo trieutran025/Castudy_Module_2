@@ -5,22 +5,25 @@ import src.repository.CustomerRepository;
 import src.repository.Impl.CustomerRepositoryImpl;
 import src.service.CustomerService;
 
+import java.io.IOException;
 import java.util.List;
 
 public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository repository = new CustomerRepositoryImpl();
     @Override
-    public List<Customer> findAll() {
+    public List<Customer> findAll() throws IOException {
        return repository.findAll();
     }
 
     @Override
-    public void add(Customer customer) {
+    public void add(Customer customer) throws IOException {
         repository.add(customer);
     }
 
     @Override
-    public void set(String customerCode, String name, String birth, String gender, String identityCard, String numberPhone, String email, String customerType, String address) {
-        repository.set( customerCode,  name,  birth,  gender,  identityCard,  numberPhone,  email,  customerType,  address);
+    public void set(Customer customer, String id) throws IOException {
+        repository.set(customer,id);
     }
+
+
 }

@@ -7,6 +7,7 @@ import src.models.Room;
 import src.models.Villa;
 import src.utils.MyUtil;
 
+import java.util.InputMismatchException;
 import java.util.Map;
 
 import static src.controllers.FurumaController.facilityService;
@@ -30,7 +31,7 @@ public class ControllerFacility {
         do {
             System.out.print("Enter serviceName:");
             serviceName = scanner.nextLine();
-            if(!serviceName.matches(regexName)){
+            if (!serviceName.matches(regexName)) {
                 System.out.println("Enter serviceName again must be Villa!");
             }
         } while (!serviceName.matches(regexName));
@@ -57,16 +58,16 @@ public class ControllerFacility {
 
         int maxPeople;
         boolean check;
-        do{
+        do {
             System.out.print("Enter max people:");
             maxPeople = Integer.parseInt(scanner.next());
-             check = (maxPeople>0&&maxPeople<20);
-            if(!check){
+            check = (maxPeople > 0 && maxPeople < 20);
+            if (!check) {
                 System.out.println("People must be >0 and <20!");
             }
-        }while (!check);
-        ControllerCustomer.ViewChoice();
-        String rentalType = ControllerCustomer.choiceCustomerType(scanner.nextInt());
+        } while (!check);
+        MyUtil.viewRentalType();
+        String rentalType = MyUtil.setRentalType(scanner.nextInt());
         MyUtil.ViewChoiceStandards();
         String roomStandards = MyUtil.setRomStandards(scanner.nextInt());
         double poolArea = 0;
@@ -74,7 +75,7 @@ public class ControllerFacility {
             try {
                 System.out.print("Enter poll area >30m2:");
                 poolArea = Double.parseDouble(scanner.next());
-                if(poolArea<=30){
+                if (poolArea <= 30) {
                     System.out.println("Please Enter poll area >30m2");
                 }
             } catch (NumberFormatException e) {
@@ -82,17 +83,17 @@ public class ControllerFacility {
             }
         } while (poolArea <= 30);
         int numberFloors = 0;
-        do{
+        do {
             try {
                 System.out.print("Enter number floors:");
                 numberFloors = Integer.parseInt(scanner.next());
                 if (numberFloors < 0) {
                     System.out.println("number float > 0");
                 }
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.err.println("Input is int!");
             }
-        }while (numberFloors<0);
+        } while (numberFloors < 0);
         Villa villa = new Villa(serviceID, serviceName, rentalCost, maxPeople, maxPeople, rentalType, roomStandards, poolArea, numberFloors);
         facilityService.addFacility(villa);
 
@@ -113,7 +114,7 @@ public class ControllerFacility {
         do {
             System.out.print("Enter serviceName:");
             serviceName = scanner.nextLine();
-            if(!serviceName.matches(regexName)){
+            if (!serviceName.matches(regexName)) {
                 System.out.println("Enter serviceName again must be House!");
             }
         } while (!serviceName.matches(regexName));
@@ -137,30 +138,30 @@ public class ControllerFacility {
         } while (rentalCost < 0);
         int maxPeople;
         boolean check;
-        do{
+        do {
             System.out.print("Enter max people:");
             maxPeople = Integer.parseInt(scanner.next());
-            check = (maxPeople>0||maxPeople<20);
-            if(!check){
+            check = (maxPeople > 0 && maxPeople < 20);
+            if (!check) {
                 System.out.println("People must be >0 or <20!");
             }
-        }while (!check);
-        ControllerCustomer.ViewChoice();
-        String rentalType = ControllerCustomer.choiceCustomerType(scanner.nextInt());
+        } while (!check);
+        MyUtil.viewRentalType();
+        String rentalType = MyUtil.setRentalType(scanner.nextInt());
         MyUtil.ViewChoiceStandards();
         String roomStandards = MyUtil.setRomStandards(scanner.nextInt());
         int numberFloors = 0;
-        do{
+        do {
             try {
                 System.out.print("Enter number floors:");
                 numberFloors = Integer.parseInt(scanner.next());
                 if (numberFloors < 0) {
                     System.out.print("number float > 0");
                 }
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.err.println("Input is Number!");
             }
-        }while (numberFloors<0);
+        } while (numberFloors < 0);
         House house = new House(serviceID, serviceName, 1, rentalCost, maxPeople, rentalType, roomStandards, numberFloors);
         facilityService.addFacility(house);
     }
@@ -170,17 +171,17 @@ public class ControllerFacility {
         String regexName = "^Room$";
         String serviceID;
         do {
-            System.out.print("Enter serviceID(SVXX-YYY):");
+            System.out.print("Enter serviceID(SVRO-YYY):");
             serviceID = scanner.nextLine();
             if (!serviceID.matches(MyRegex.REGEX_SERVICE_ROOM)) {
-                System.out.print("ServiceID must be (SVXX-YYYY)!");
+                System.out.print("ServiceID must be (SVRO-YYYY)!");
             }
         } while (!serviceID.matches(MyRegex.REGEX_SERVICE_ROOM));
         String serviceName;
         do {
             System.out.print("Enter serviceName:");
             serviceName = scanner.nextLine();
-            if(!serviceName.matches(regexName)){
+            if (!serviceName.matches(regexName)) {
                 System.out.println("Enter serviceName again must be House!");
             }
         } while (!serviceName.matches(regexName));
@@ -204,16 +205,16 @@ public class ControllerFacility {
         } while (rentalCost < 0);
         int maxPeople;
         boolean check;
-        do{
+        do {
             System.out.print("Enter max people:");
             maxPeople = Integer.parseInt(scanner.next());
-            check = (maxPeople>0&&maxPeople<20);
-            if(!check){
+            check = (maxPeople > 0 && maxPeople < 20);
+            if (!check) {
                 System.out.println("People must be >0 or <20!");
             }
-        }while (!check);
+        } while (!check);
         MyUtil.viewRentalType();
-        String rentalType =MyUtil.setRentalType(scanner.nextInt());
+        String rentalType = MyUtil.setRentalType(scanner.nextInt());
         MyUtil.ViewChoiceServiceFree();
         String serviceFree = String.valueOf(Integer.parseInt(MyUtil.setServiceFree(scanner.nextInt())));
         Room room = new Room(serviceID, serviceName, usableArea, rentalCost, maxPeople, rentalType, serviceFree);
@@ -237,22 +238,28 @@ public class ControllerFacility {
             System.out.println("4. Back to menu");
             System.out.println("-------------------------------------");
             System.out.print("Enter choice:");
-            int choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    addNewVilla();
+            try {
+                int choice = scanner.nextInt();
+                switch (choice) {
+                    case 1:
+                        addNewVilla();
+                        break;
+                    case 2:
+                        addNewHouse();
+                        break;
+                    case 3:
+                        addNewRoom();
+                        break;
+                    case 4:
+                        break;
+                    default:
+                        System.out.println("Please Enter number 1 -> 4:");
+                }
+                if (choice == 4) {
                     break;
-                case 2:
-                    addNewHouse();
-                    break;
-                case 3:
-                    addNewRoom();
-                    break;
-                case 4:
-                    break;
-            }
-            if (choice == 4) {
-                break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Input must be Number and type Number is integer!");
             }
         } while (true);
     }

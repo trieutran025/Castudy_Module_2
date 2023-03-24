@@ -1,14 +1,18 @@
 package src.models;
 
 public class Customer extends Person {
-    private String customerCode;
+
 
     private String customerType;
     private String address;
 
-    public Customer(String customerCode, String name, String birth, String gender, String identityCard, String numberPhone, String email, String customerType, String address) {
-        super(name, birth, gender, identityCard, numberPhone, email);
-        this.customerCode = customerCode;
+    public Customer(String customerType, String address) {
+        this.customerType = customerType;
+        this.address = address;
+    }
+
+    public Customer(String id, String name, String birth, String gender, String identityCard, String numberPhone, String email, String customerType, String address) {
+        super(id, name, birth, gender, identityCard, numberPhone, email);
         this.customerType = customerType;
         this.address = address;
     }
@@ -16,13 +20,6 @@ public class Customer extends Person {
     public Customer() {
     }
 
-    public String getCustomerCode() {
-        return customerCode;
-    }
-
-    public void setCustomerCode(String customerCode) {
-        this.customerCode = customerCode;
-    }
 
     public String getCustomerType() {
         return customerType;
@@ -42,10 +39,9 @@ public class Customer extends Person {
 
     @Override
     public String toString() {
-        return super.toString()+
-                "Customer:"+
-                "email='" + getEmail() + "\'" +
-                ", customerType='" + customerType + '\'' +
+        return "Customer{" +
+                super.toString() +
+                "customerType='" + customerType + '\'' +
                 ", address='" + address + '\'' +
                 '}';
     }

@@ -5,8 +5,8 @@ public class House extends Facility {
     private int numberFloors;
 
 
-    public House(String serviceID,String serviceName, double usableArea, long rentalCost, int maxPeople, String rentalType, String roomStandards, int numberFloors) {
-        super(serviceID,serviceName, usableArea, rentalCost, maxPeople, rentalType);
+    public House(String serviceID, String serviceName, double usableArea, long rentalCost, int maxPeople, String rentalType, String roomStandards, int numberFloors) {
+        super(serviceID, serviceName, usableArea, rentalCost, maxPeople, rentalType);
         this.roomStandards = roomStandards;
         this.numberFloors = numberFloors;
     }
@@ -42,5 +42,10 @@ public class House extends Facility {
                 "roomStandards=" + roomStandards +
                 ", numberFloors=" + numberFloors +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Facility o) {
+        return 0;
     }
 }

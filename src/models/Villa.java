@@ -1,12 +1,12 @@
 package src.models;
 
-public class Villa extends Facility{
+public class Villa extends Facility {
     private String roomStandards;
     private double poolAre;
     private int numberFloors;
 
 
-    public Villa(String serviceID, String serviceName, double usableArea, long rentalCost, int maxPeople,String rentalType, String roomStandards, double poolAre, int numberFloors) {
+    public Villa(String serviceID, String serviceName, double usableArea, long rentalCost, int maxPeople, String rentalType, String roomStandards, double poolAre, int numberFloors) {
         super(serviceID, serviceName, usableArea, rentalCost, maxPeople, rentalType);
         this.roomStandards = roomStandards;
         this.poolAre = poolAre;
@@ -45,10 +45,15 @@ public class Villa extends Facility{
 
     @Override
     public String toString() {
-        return super.toString()+
+        return super.toString() +
                 "roomStandards=" + roomStandards +
                 ", poolAre=" + poolAre +
                 ", numberFloors=" + numberFloors +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Facility o) {
+        return 0;
     }
 }

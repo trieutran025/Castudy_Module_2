@@ -7,8 +7,8 @@ import java.util.Map;
 public interface FacilityRepository {
     Map<Facility, Integer> displayFacility();
 
-   void addFacility(Facility o);
+    void addFacility(Facility o);
 
-     void displayListMaintenance();
+    void displayListMaintenance();
 
 }

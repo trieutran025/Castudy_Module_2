@@ -1,6 +1,8 @@
 package src.models;
 
-public class Booking {
+import java.util.Comparator;
+
+public class Booking implements Comparator<Booking> {
     private String bookingCode;
     private String startDay;
     private String endDay;
@@ -66,5 +68,10 @@ public class Booking {
 
     public void setServiceType(String serviceType) {
         this.serviceType = serviceType;
+    }
+
+    @Override
+    public int compare(Booking o1, Booking o2) {
+        return 0;
     }
 }
