@@ -7,5 +7,5 @@ import java.util.Set;
 
 public interface BookingRepository {
     void addBooking(Booking o);
-    Set<Booking> findAdd();
+    Set<Booking> findAll();
 }

@@ -25,7 +25,6 @@ public class ControllerCustomer {
         System.out.println("Choice Type:");
         System.out.println("1.Diamond\n2.Platinum\n3.Gold\n4.Silver\n5.Member");
     }
-
     public static String choiceCustomerType(int numberChoice) {
         do {
             try {
@@ -55,7 +54,9 @@ public class ControllerCustomer {
         } while (Objects.equals(customerType, ""));
         return customerType;
     }
-
+    public static boolean checkId(String id) throws IOException {
+        return customerService.checkID(id);
+    }
     public static void findAll() throws IOException {
         List<Customer> customerList = customerService.findAll();
         for (Customer customer : customerList) {
@@ -69,70 +70,71 @@ public class ControllerCustomer {
         do {
             System.out.print("Enter CustomerCode(C-XXXX):");
             customerID = scanner.next();
-        } while (!customerID.matches(REGEX_CUSTOMER_ID));
+            if(checkId(customerID)){
+                System.out.println("ID Da ton tai!");
+            }
+        } while (!customerID.matches(REGEX_CUSTOMER_ID)||checkId(customerID));
+            String customerName;
+            do {
+                System.out.print("Enter customer name:");
+                customerName = scanner.next();
+            } while (!customerName.matches(REGEX_NAME));
 
-        String customerName;
-        do {
-            System.out.print("Enter customer name:");
-            customerName = scanner.next();
-        } while (!customerName.matches(REGEX_NAME));
-
-        String birth =null;
-        boolean check = false;
-        do {
-            try {
-                System.out.print("Enter birthday(dd/MM/yyyy):");
-                birth = scanner.next();
-                LocalDate birthday = LocalDate.parse(birth, DateTimeFormatter.ofPattern(MyRegex.REGEX_DATE));
-                LocalDate today = LocalDate.now();
-                int age = Period.between(birthday, today).getYears();
-                check = MyUtil.checkDate(age);
-                if (!check) {
-                    System.out.println("Enter birthday is age :>= 18 or <=100");
+            String birth = null;
+            boolean check = false;
+            do {
+                try {
+                    System.out.print("Enter birthday(dd/MM/yyyy):");
+                    birth = scanner.next();
+                    LocalDate birthday = LocalDate.parse(birth, DateTimeFormatter.ofPattern(MyRegex.REGEX_DATE));
+                    LocalDate today = LocalDate.now();
+                    int age = Period.between(birthday, today).getYears();
+                    check = MyUtil.checkDate(age);
+                    if (!check) {
+                        System.out.println("Enter birthday is age :>= 18 or <=100");
+                    }
+                } catch (DateTimeParseException e) {
+                    System.err.println("Error convent date");
+                    System.out.println();
                 }
-            }catch (DateTimeParseException e){
-                System.err.println("Error convent date");
-                System.out.println();
-            }
-        } while (!check);
-        MyUtil.ViewGender();
-        String gender = MyUtil.setGender(scanner.nextInt());
-        String identityCard;
-        boolean b;
-        do{
-            scanner.nextLine();
-            System.out.print("Enter identityCard:");
-            identityCard = scanner.nextLine();
-             b =!identityCard.matches(MyRegex.REGEX_ID_NUMBER);
-            if(!b){
-                System.out.println("input identityCard number 9 or 12 !");
-            }
-        }while (!b);
-        String numberPhone;
-        do {
-            System.out.print("Enter number phone:");
-            numberPhone = scanner.nextLine();
-            if (!numberPhone.matches(MyRegex.REGEX_NUMBER_PHONE)) {
-                System.out.println("Enter must be format!");
-            }
-        } while (!numberPhone.matches(MyRegex.REGEX_NUMBER_PHONE));
-        String email;
-        do {
-            System.out.println("Enter email:");
-            email = scanner.nextLine();
-            if (!email.matches(MyRegex.REGEX_EMAIL)) {
-                System.out.println("Enter email must be format!");
-            }
-        } while (!email.matches(MyRegex.REGEX_EMAIL));
-        System.out.print("Choice CustomerType");
-        ViewChoice();
-        String Type = choiceCustomerType(scanner.nextInt());
-        System.out.print("Enter Address Customer:");
-        String address = scanner.next();
-        Customer customer = new Customer(customerID, customerName, birth, gender, identityCard, numberPhone, email, Type, address);
-        customerService.add(customer);
-    }
-
+            } while (!check);
+            MyUtil.ViewGender();
+            String gender = MyUtil.setGender(scanner.nextInt());
+            String identityCard;
+            boolean b;
+            do {
+                scanner.nextLine();
+                System.out.print("Enter identityCard:");
+                identityCard = scanner.nextLine();
+                b = !identityCard.matches(MyRegex.REGEX_ID_NUMBER);
+                if (!b) {
+                    System.out.println("input identityCard number 9 or 12 !");
+                }
+            } while (!b);
+            String numberPhone;
+            do {
+                System.out.print("Enter number phone:");
+                numberPhone = scanner.nextLine();
+                if (!numberPhone.matches(MyRegex.REGEX_NUMBER_PHONE)) {
+                    System.out.println("Enter must be format!");
+                }
+            } while (!numberPhone.matches(MyRegex.REGEX_NUMBER_PHONE));
+            String email;
+            do {
+                System.out.println("Enter email:");
+                email = scanner.nextLine();
+                if (!email.matches(MyRegex.REGEX_EMAIL)) {
+                    System.out.println("Enter email must be format!");
+                }
+            } while (!email.matches(MyRegex.REGEX_EMAIL));
+            System.out.print("Choice CustomerType");
+            ViewChoice();
+            String Type = choiceCustomerType(scanner.nextInt());
+            System.out.print("Enter Address Customer:");
+            String address = scanner.next();
+            Customer customer = new Customer(customerID, customerName, birth, gender, identityCard, numberPhone, email, Type, address);
+            customerService.add(customer);
+        }
     public static void setCustomer() throws IOException {
         scanner.nextLine();
         String customerID;

@@ -110,7 +110,13 @@ public class ControllerEmployee {
             System.out.println(employee);
         }
     }
-
+    public static boolean checkId(String id){
+        try {
+            return employeeService.checkId(id);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public static void add() throws IOException {
         scanner.nextLine();
         String employeeID;
@@ -120,7 +126,10 @@ public class ControllerEmployee {
             if (!employeeID.matches(REGEX_ELEMENT_ID)) {
                 System.out.println("Please element id format E-YYYY(Y is number)!");
             }
-        } while (!employeeID.matches(REGEX_ELEMENT_ID));
+            if(checkId(employeeID)){
+                System.out.println("ID da ton tai!");
+            }
+        } while (!employeeID.matches(REGEX_ELEMENT_ID)||checkId(employeeID));
         String name;
         do {
             System.out.print("Enter employee name :");

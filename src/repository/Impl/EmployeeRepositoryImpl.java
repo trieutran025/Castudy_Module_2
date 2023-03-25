@@ -59,7 +59,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         employeeList.add(employee);
         writeCSV(employeeList);
     }
-
     @Override
     public void set(Employee employee, String id) throws IOException {
         List<Employee> employeeList = readCSV();
@@ -70,6 +69,17 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             }
         }
         writeCSV(employeeList);
+    }
+
+    @Override
+    public boolean checkId(String id) throws IOException {
+        List<Employee> employeeList = readCSV();
+        for (int i = 0; i <employeeList.size() ; i++) {
+            if(employeeList.get(i).getId().equals(id)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

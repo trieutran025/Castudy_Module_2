@@ -1,6 +1,8 @@
 package src.models;
 
-public class Customer extends Person {
+import java.util.Objects;
+
+public class Customer extends Person  {
 
 
     private String customerType;
@@ -38,6 +40,20 @@ public class Customer extends Person {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Customer)) return false;
+        if (!super.equals(o)) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(getCustomerType(), customer.getCustomerType()) && Objects.equals(getAddress(), customer.getAddress());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode());
+    }
+
+    @Override
     public String toString() {
         return "Customer{" +
                 super.toString() +
@@ -45,4 +61,6 @@ public class Customer extends Person {
                 ", address='" + address + '\'' +
                 '}';
     }
+
+
 }

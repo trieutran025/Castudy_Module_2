@@ -11,4 +11,5 @@ public interface CustomerRepository {
     void add(Customer customer) throws IOException;
 
     void set(Customer customer, String id) throws IOException;
+    boolean checkId(String id) throws IOException;
 }

@@ -71,7 +71,20 @@ public class Booking implements Comparator<Booking> {
     }
 
     @Override
+    public String toString() {
+        return "Booking{" +
+                "bookingCode='" + bookingCode + '\'' +
+                ", startDay='" + startDay + '\'' +
+                ", endDay='" + endDay + '\'' +
+                ", customerCode='" + customerCode + '\'' +
+                ", serviceName='" + serviceName + '\'' +
+                ", serviceType='" + serviceType + '\'' +
+                '}';
+    }
+
+    @Override
     public int compare(Booking o1, Booking o2) {
         return 0;
     }
+
 }

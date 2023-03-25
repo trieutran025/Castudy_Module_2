@@ -70,4 +70,14 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         }
         writeCSV(customerList);
     }
+
+    @Override
+    public boolean checkId(String id) throws IOException {
+        List<Customer> customerList = readCSV();
+        for(int i=0;i<customerList.size();i++){
+            if(customerList.get(i).getId().equals(id))
+                return true;
+        }
+        return false;
+    }
 }

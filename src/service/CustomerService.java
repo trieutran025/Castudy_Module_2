@@ -9,4 +9,8 @@ public interface CustomerService extends Service{
     List<Customer> findAll() throws IOException;
     void add(Customer customer) throws IOException;
     void set(Customer customer,String id) throws IOException;
+
+    boolean checkID(String id) throws IOException;
+
+    boolean hashCode(String id);
 }

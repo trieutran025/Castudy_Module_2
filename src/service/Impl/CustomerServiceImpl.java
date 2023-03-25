@@ -25,5 +25,15 @@ public class CustomerServiceImpl implements CustomerService {
         repository.set(customer,id);
     }
 
+    @Override
+    public boolean checkID(String id) throws IOException {
+        return repository.checkId(id);
+    }
+
+    @Override
+    public boolean hashCode(String id) {
+        return false;
+    }
+
 
 }

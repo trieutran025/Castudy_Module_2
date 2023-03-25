@@ -26,5 +26,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         repository.set(employee,id);
     }
 
+    @Override
+    public boolean checkId(String id) throws IOException {
+        return repository.checkId(id);
+    }
+
 
 }

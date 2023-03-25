@@ -1,6 +1,8 @@
 package src.models;
 
-public abstract class Person {
+import java.util.Objects;
+
+public abstract class Person implements Comparable<Person>{
     private String id;
     private String name;
     private String birth;
@@ -80,6 +82,19 @@ public abstract class Person {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        Person person = (Person) o;
+        return getId().equals(person.getId()) && Objects.equals(getName(), person.getName()) && Objects.equals(getBirth(), person.getBirth()) && Objects.equals(getGender(), person.getGender()) && Objects.equals(getIdentityCard(), person.getIdentityCard()) && Objects.equals(getNumberPhone(), person.getNumberPhone()) && Objects.equals(getEmail(), person.getEmail());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    @Override
     public String toString() {
         return "Person{" +
                 "id='" + id + '\'' +
@@ -90,5 +105,10 @@ public abstract class Person {
                 ", numberPhone='" + numberPhone + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Person o) {
+        return this.id.compareTo(o.getId());
     }
 }

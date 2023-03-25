@@ -98,7 +98,7 @@ public class Menu {
         } while (true);
         return false;
     }
-    public static boolean displayBooking() {
+    public static boolean displayBooking() throws IOException {
         int number;
         do {
             System.out.println("-------------------------------------");
@@ -112,7 +112,8 @@ public class Menu {
             System.out.print("Enter number choice 1-->6:");
             number=scanner.nextInt();
             switch (number){
-                case 1 : ControllerBooking.findAdd();break;
+                case 1 : ControllerBooking.findAll();break;
+                case 2: ControllerBooking.Add();break;
                 case 6: break;
             }
             if(number==6){

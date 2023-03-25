@@ -17,7 +17,7 @@ public class BookingRepositoryImpl implements BookingRepository {
     }
 
     @Override
-    public Set<Booking> findAdd() {
+    public Set<Booking> findAll() {
         return bookingSet;
     }
 }

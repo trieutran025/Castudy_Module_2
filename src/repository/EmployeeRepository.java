@@ -11,4 +11,5 @@ public interface EmployeeRepository {
     void add(Employee employee) throws IOException;
 
     void set(Employee employee, String id) throws IOException;
+    boolean checkId(String id) throws IOException;
 }
